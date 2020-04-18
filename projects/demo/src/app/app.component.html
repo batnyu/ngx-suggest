@@ -1,1 +1,35 @@
-<ngx-suggest></ngx-suggest>
+<!-- <div class="control">
+  <input
+    class="input is-medium"
+    placeholder="Search..."
+    [formControl]="control"
+    [ngxSuggest]="suggest"
+  />
+</div> -->
+
+<mat-form-field class="example-full-width">
+  <mat-label>Filters</mat-label>
+  <input
+    matInput
+    placeholder="Search"
+    [formControl]="control"
+    [ngxSuggest]="suggest"
+  />
+</mat-form-field>
+
+<p style="color: black; font-size: 18px; margin-bottom: 10px;">
+  {{ control.value }}
+</p>
+
+<ngx-suggest #suggest="ngxSuggest">
+  <ng-template ngxSuggestContent>
+    <ng-container *ngIf="options | filter: control.value as result">
+      <ngx-option *ngFor="let option of result" [value]="option.label">
+        {{ option.label }}
+      </ngx-option>
+      <ngx-option class="no-result" *ngIf="!result.length"
+        >No result...</ngx-option
+      >
+    </ng-container>
+  </ng-template>
+</ngx-suggest>

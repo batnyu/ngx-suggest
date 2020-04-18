@@ -11,14 +11,12 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "ngx-suggest": [
-        "dist/ngx-suggest/ngx-suggest",
-        "dist/ngx-suggest"
+      "ngx-suggest": ["dist/ngx-suggest/ngx-suggest", "dist/ngx-suggest"],
+      "@angular/*": ["./node_modules/@angular/*"],
+      "ngx-take-until-destroy": [
+        "./projects/ngx-suggest/node_modules/ngx-take-until-destroy"
       ]
     }
   },
