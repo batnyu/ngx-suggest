@@ -1,13 +1,13 @@
 import {
   Component,
-  OnInit,
   ViewChild,
   ContentChild,
   ContentChildren,
-  QueryList
+  QueryList,
+  Input
 } from '@angular/core';
-import { NgxSuggestContentDirective } from './ngx-suggest-content.directive';
-import { NgxOptionComponent } from './ngx-option.component';
+import { NgxSuggestContentDirective } from '../ngx-suggest-content.directive';
+import { NgxOptionComponent } from '../ngx-option/ngx-option.component';
 import { switchMap } from 'rxjs/operators';
 import { merge } from 'rxjs';
 
@@ -29,6 +29,8 @@ export class NgxSuggestComponent {
   @ContentChild(NgxSuggestContentDirective) content: NgxSuggestContentDirective;
 
   @ContentChildren(NgxOptionComponent) options: QueryList<NgxOptionComponent>;
+
+  @Input() displayWith: ((value: any) => string) | null = null;
 
   optionsClick() {
     return this.options.changes.pipe(

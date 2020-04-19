@@ -6,7 +6,7 @@ import {
   ViewContainerRef,
   OnDestroy
 } from '@angular/core';
-import { NgxSuggestComponent } from './ngx-suggest.component';
+import { NgxSuggestComponent } from './ngx-suggest/ngx-suggest.component';
 import { fromEvent } from 'rxjs';
 import {
   OverlayRef,
@@ -53,8 +53,10 @@ export class NgxSuggestDirective implements OnInit, OnDestroy {
           .optionsClick()
           .pipe(takeUntil(this.overlayRef.detachments()))
           .subscribe((value: string) => {
+            // const actualValue = this.control.value;
+            // const valueToSet = `${actualValue || ''}${value}`;
             this.control.setValue(value);
-            this.close();
+            // this.close();
           });
       });
   }
@@ -64,7 +66,7 @@ export class NgxSuggestDirective implements OnInit, OnDestroy {
   openDropdown() {
     this.overlayRef = this.overlay.create({
       width: this.origin.offsetWidth,
-      maxHeight: 40 * 3,
+      maxHeight: 40 * 4,
       backdropClass: '',
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       positionStrategy: this.getOverlayPosition()
@@ -87,9 +89,14 @@ export class NgxSuggestDirective implements OnInit, OnDestroy {
     const positions = [
       new ConnectionPositionPair(
         { originX: 'start', originY: 'bottom' },
-        { overlayX: 'start', overlayY: 'top' }
+        { overlayX: 'start', overlayY: 'top' },
+        0,
+        9,
+        'panelClassTODO'
       )
     ];
+
+    // 6,125 px ou .4375em
 
     return this.overlay
       .position()
